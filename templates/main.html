@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <title>{% block title %} {% endblock %}</title>
+    {% include 'includes/head_refs.html' %}
+</head>
+<body>
+<!-- header references -->
+{% include 'includes/header_refs.html' %}
+<!-- Sidebar nav references -->
+{% include 'includes/sidebar_refs.html' %}
+<!-- Content -->
+{% block content %} {% endblock %}
+    <!-- Footer -->
+    {% include 'includes/footer_refs.html' %}
+    <!-- Demo Menu -->
+
+    <!-- JavaScripts -->
+    {% include 'includes/js_refs.html' %}
+</body>
+</html>
