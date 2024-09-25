@@ -17,3 +17,5 @@ class PersInfo(models.Model):
         verbose_name = 'اطلاعات شخصی'
         verbose_name_plural = verbose_name
 
+
+
