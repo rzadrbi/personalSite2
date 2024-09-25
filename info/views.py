@@ -9,3 +9,5 @@ class indexView(TemplateView):
         return dict(personal_info=personal_info)
 
 
+
+
