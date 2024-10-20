@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views.generic import TemplateView
 from info import views
 
 app_name = 'info'

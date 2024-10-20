@@ -7,4 +7,5 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('info.urls')),
+    path('blog/', include('blog.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
