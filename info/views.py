@@ -7,3 +7,7 @@ class indexView(TemplateView):
     def get_context_data(self, **kwargs):
         personal_info = models.PersInfo.objects.first()
         return dict(personal_info=personal_info)
+
+
+
+
