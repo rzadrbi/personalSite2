@@ -1,4 +1,5 @@
 from django.db import models
+import django_jalali.db.models as jmodels
 
 
 class PersInfo(models.Model):
