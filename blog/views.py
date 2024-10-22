@@ -11,3 +11,7 @@ class PostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+    template_name = 'blog_detail.html'
+    context_object_name = 'post'
+    slug_field = 'slug'
+    slug_url_kwarg = 'post'

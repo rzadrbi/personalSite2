@@ -1,9 +1,9 @@
-from audioop import reverse
-
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
-import django_jalali.db.models as jmodels
+from django.utils.html import format_html
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -16,6 +16,9 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique=True)
     body = models.TextField()
+    caption = models.TextField()
+    caption_2 = models.TextField()
+    picture = models.ImageField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
@@ -32,4 +35,27 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('')
+        return reverse('blog:detail',
+                       args=[self.slug,
+                             ])
+
+    # def show_image1(self):
+    #     if self.picture1:
+    #         return format_html(
+    #             f'<img src="{self.picture1.url}" alt="{self.title}" style="max-width: 200px; max-height: 200px;">')
+    #
+    # return "No Image"
+    #
+    # def show_image2(self):
+    #     if self.picture2:
+    #         return format_html(
+    #             f'<img src="{self.picture2.url}" alt="{self.title}" style="max-width: 200px; max-height: 200px;">')
+    #
+    # return "No Image"
+    #
+    # def show_image3(self):
+    #     if self.picture3:
+    #         return format_html(
+    #             f'<img src="{self.picture3.url}" alt="{self.title}" style="max-width: 200px; max-height: 200px;">')
+    #
+    # return "No Image"
