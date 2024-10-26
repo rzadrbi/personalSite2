@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.template.defaulttags import comment
 from django.views.generic import ListView, DetailView
-from blog.models import Post
+from blog.models import Post, Comment
 
 
 class PostListView(ListView):
@@ -15,3 +16,8 @@ class PostDetailView(DetailView):
     context_object_name = 'post'
     slug_field = 'slug'
     slug_url_kwarg = 'post'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment'] = Comment.objects.filter(post=self.object)
+        return context

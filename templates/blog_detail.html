@@ -1,6 +1,7 @@
 {% extends 'main.html' %}
 {% load static %}
 {% load jalali_tags %}
+{% load custom_filters %}
 {% block title %} {{ post.title }} {% endblock %}
 {% block content %}
 
@@ -42,7 +43,7 @@
                             </div>
                             <footer class="footer-post">
                                 <a class="footer-post__share" href="tg://msg_url?url={{ request.build_absolute_uri }}&text={{ post.title }}" target="_blank"><img class="font-icon" src="{% static 'icons/telegram.svg' %}" alt="Telegram Icon"><span>اشتراک این پست در تلگرام</span></a>
-                                <a class="footer-post__share" href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}&summary={{ post.summary }}&source=Reza Darabi"><i class="font-icon icon-linkedin"></i><span> اشتراک این پست در لینکدین</span></a>
+                                <a class="footer-post__share" href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}&summary={{ post.summary }}&source=Reza Darabi" target="_blank"><i class="font-icon icon-linkedin"></i><span> اشتراک این پست در لینکدین</span></a>
                             </footer>
                         </div>
 						
@@ -90,25 +91,27 @@
                             </div>
 							
                             <!-- Comment -->
-                            <div class="comment-box">
-                                <div class="comment-box__inner">
-                                    <svg class="avatar avatar--60" viewBox="0 0 84 84">
-                                        <g class="avatar__hexagon">
-                                            <image xlink:href="{% static 'img/avatar-6.jpg' %}" height="100%" width="100%" />
-                                        </g>
-                                    </svg>
-                                    <div class="comment-box__body">
-                                        <h5 class="comment-box__details"><span>علی نیازی</span><span class="comment-box__details-date">15 دقیقه پیش</span></h5>
-                                        <p>از این مقاله خوب متشکرم. منتظر موارد جدید هستیم.</p>
-										
-                                        <ul class="comment-box__footer">
-                                            <li><i class="font-icon icon-like-fill"></i> <span>15</span></li>
-                                            <li><i class="font-icon icon-reply"></i> <span>پاسخ</span></li>
-                                        </ul>
+                            {% for comment in comment %}
+                                <div class="comment-box">
+                                    <div class="comment-box__inner">
+                                        <svg class="avatar avatar--60" viewBox="0 0 84 84">
+                                            <g class="avatar__hexagon">
+                                                <image xlink:href="{% static 'img/avatar-6.jpg' %}" height="100%" width="100%" />
+                                            </g>
+                                        </svg>
+                                        <div class="comment-box__body">
+                                            <h5 class="comment-box__details"><span>{{ comment.user.get_username }}</span><span class="comment-box__details-date">{{ comment.created|time_since }}</span></h5>
+                                            <p>{{ comment.body }}</p>
+
+                                            <ul class="comment-box__footer">
+                                                <li><i class="font-icon icon-like-fill"></i> <span>15</span></li>
+                                                <li><i class="font-icon icon-reply"></i> <span>پاسخ</span></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-							
+                            {% endfor %}
+
                             <!-- Comment form -->
                             <ul class="social-auth">
                                 <li class="social-auth__item">وارد شوید با:</li>

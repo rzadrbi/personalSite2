@@ -43,23 +43,23 @@ class Post(models.Model):
                        args=[self.slug,
                              ])
 
-    # def show_image1(self):
-    #     if self.picture1:
-    #         return format_html(
-    #             f'<img src="{self.picture1.url}" alt="{self.title}" style="max-width: 200px; max-height: 200px;">')
-    #
-    # return "No Image"
-    #
-    # def show_image2(self):
-    #     if self.picture2:
-    #         return format_html(
-    #             f'<img src="{self.picture2.url}" alt="{self.title}" style="max-width: 200px; max-height: 200px;">')
-    #
-    # return "No Image"
-    #
-    # def show_image3(self):
-    #     if self.picture3:
-    #         return format_html(
-    #             f'<img src="{self.picture3.url}" alt="{self.title}" style="max-width: 200px; max-height: 200px;">')
-    #
-    # return "No Image"
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post,
+                             on_delete=models.CASCADE,
+                             related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    body = models.TextField()
+    created = models.DateTimeField()
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['created']
+        indexes = [
+            models.Index(fields=['created']),
+        ]
+
+    def __str__(self):
+        return f'Comment by {self.user.get_username} on {self.post}'
+
