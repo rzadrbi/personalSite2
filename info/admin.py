@@ -5,3 +5,9 @@ from info import models
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'phone',]
 
+
+@admin.register(models.IDOInfo)
+class IDOInfoAdmin(admin.ModelAdmin):
+    list_display = ['title', 'description',]
+
+

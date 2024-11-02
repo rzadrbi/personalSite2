@@ -1,5 +1,4 @@
 from django.db import models
-import django_jalali.db.models as jmodels
 
 
 class PersInfo(models.Model):
@@ -18,6 +17,15 @@ class PersInfo(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class IDOInfo(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    icon = models.FileField(upload_to='icon')
+
+    def __str__(self):
+        return self.title
 
 
 

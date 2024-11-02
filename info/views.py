@@ -6,7 +6,8 @@ class indexView(TemplateView):
     template_name = 'index.html'
     def get_context_data(self, **kwargs):
         personal_info = models.PersInfo.objects.first()
-        return dict(info=personal_info)
+        ido = models.IDOInfo.objects.all()
+        return dict(info=personal_info, ido=ido)
 
 
 
