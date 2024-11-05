@@ -15,14 +15,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['get_username', 'get_user_email', 'post', 'created', 'active']
-    list_filter = ['active', 'created', 'updated']
-    search_fields = ['user__username', 'user__email', 'body']
+    list_display = ['name', 'body', 'post', 'created', 'active',]
+    list_filter = ['active', 'created',]
+    search_fields = ['name', 'body',]
 
-    def get_username(self, obj):
-        return obj.user.username
-    get_username.short_description = 'User Name'
-
-    def get_user_email(self, obj):
-        return obj.user.email
-    get_user_email.short_description = 'User Email'
