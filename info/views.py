@@ -9,6 +9,6 @@ class indexView(TemplateView):
         ido = models.IDOInfo.objects.all()
         return dict(info=personal_info, ido=ido)
 
-
-
-
+class resumeView(TemplateView):
+    template_name = 'resume.html'
+    def get_context_data(self, **kwargs):
