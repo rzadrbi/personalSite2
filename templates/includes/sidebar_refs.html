@@ -4,7 +4,7 @@
     <div class="sidebar box sticky-column">
         <ul class="nav">
             <li class="nav__item"><a class="{% if current_url == "info:main" %}active{% endif %}" href="{% url 'info:main' %}"><i class="icon-user"></i>درباره ی ما</a></li>
-            <li class="nav__item"><a href="resume.html"><i class="icon-file-text"></i>رزومه</a></li>
+            <li class="nav__item"><a class="{% if current_url == "info:Resume" %}active{% endif %}" href="{% url 'info:Resume' %}"><i class="icon-file-text"></i>رزومه</a></li>
             <li class="nav__item"><a href="works.html"><i class="icon-codesandbox"></i> کارها</a></li>
             <li class="nav__item"><a class="{% if current_url == "blog:blog_list" %}active{% endif %}" href="{% url 'blog:blog_list' %}"><i class="icon-book-open"></i>وبلاگ</a></li>
             <li class="nav__item"><a href="contact.html"><i class="icon-book"></i>تماس با ما</a></li>

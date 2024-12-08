@@ -43,7 +43,10 @@ class Experience(models.Model):
     def __str__(self):
         return self.name
 
-class
 
+class Skill(models.Model):
+    name = models.CharField(max_length=120)
+    percent = models.IntegerField()
 
-
+    def __str__(self):
+        return self.name
