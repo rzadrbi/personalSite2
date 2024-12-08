@@ -22,3 +22,4 @@ class ExperienceAdmin(admin.ModelAdmin):
 @admin.register(models.Skill)
 class SkillAdmin(admin.ModelAdmin):
     list_display = ['name', 'percent',]
+
