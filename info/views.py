@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
-from info import models
+from django.views.generic import TemplateView, FormView
+from info import models, forms
+
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -15,3 +16,11 @@ class ResumeView(TemplateView):
         return dict(edu=models.Education.objects.all(),
                     exp=models.Experience.objects.all(),
                     skl=models.Skill.objects.all())
+
+
+class ContactView(FormView):
+    template_name = 'contact_us.html'
+    form_class = forms.TiketForm
+    success_url = '/'
+    def form_valid(self, form):
+        pass

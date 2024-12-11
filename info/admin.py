@@ -23,3 +23,7 @@ class ExperienceAdmin(admin.ModelAdmin):
 class SkillAdmin(admin.ModelAdmin):
     list_display = ['name', 'percent',]
 
+@admin.register(models.Ticket)
+class TicketAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'replied', 'body', ]
+    filter = ['replied', ]

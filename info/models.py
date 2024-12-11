@@ -50,3 +50,16 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.name
+
+class Ticket(models.Model):
+    name = models.CharField(max_length=120)
+    email = models.EmailField()
+    body = models.TextField()
+    replied = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    replied_at = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return self.name + self.body[:40]
+
+

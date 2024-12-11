@@ -1,6 +1,6 @@
 /* ------------------------------------------------
  Author: Melika Khaliliyan
- 
+
  Template Name: vCard 3
  version: 1.0.0
 ------------------------------------------------ */
@@ -28,7 +28,7 @@
  - Testimonials
  - Timeline
  - Other
- 
+
 ------------------------------------------------ */
 @import url(vendors/rtl/bootstrap.min.css);
 @import url(vendors/swiper.min.css);
@@ -2450,5 +2450,7 @@ button:focus {
   height: 100%;
   z-index: -1;
 }
+
+
 
 /*# sourceMappingURL=style.css.map */
