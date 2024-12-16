@@ -23,4 +23,6 @@ class ContactView(FormView):
     form_class = forms.TiketForm
     success_url = '/'
     def form_valid(self, form):
-        pass
+        form.save()
+        return super(ContactView, self).form_valid(form)
+
