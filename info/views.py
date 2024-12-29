@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, FormView
 from info import models, forms
 
@@ -23,6 +23,17 @@ class ContactView(FormView):
     form_class = forms.TiketForm
     success_url = '/'
     def form_valid(self, form):
+        print('kir1')
         form.save()
+        print('kir2')
         return super(ContactView, self).form_valid(form)
 
+# def contact_view(request):
+#     if request.method == 'POST':
+#         form = forms.TiketForm(request.POST)
+#         if form.is_valid():
+#             # Process the form data
+#             return redirect('info:main')  # Redirect after successful form submission
+#     else:
+#         form = forms.TiketForm()
+#         return render(request, 'contact_us.html', {'form': form})
