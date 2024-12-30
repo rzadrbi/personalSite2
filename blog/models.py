@@ -45,28 +45,3 @@ class Post(models.Model):
                              ])
 
 
-
-class Comment(models.Model):
-    GENDER_CHOICES = [
-        ('M', 'Male'),
-        ('F', 'Female'),
-    ]
-
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    parent = models.ForeignKey('self', null=True, blank=True, related_name='reply', on_delete=models.CASCADE)
-    name = models.CharField(max_length=250)
-    body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=True)
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
-
-    def __str__(self):
-        return self.name + '  --->  ' + self.body[:20]
-
-    def clean(self):
-        if self.parent and self.parent.parent:
-            raise ValidationError('A comment with a parent cannot be a parent of another comment.')
-
-    def save(self, *args, **kwargs):
-        self.clean()
-        super().save(*args, **kwargs)
