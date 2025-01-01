@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.core.mail import send_mail
 from django.views.generic import TemplateView, FormView
 from info import models, forms
 
@@ -23,17 +23,18 @@ class ContactView(FormView):
     form_class = forms.TiketForm
     success_url = '/'
     def form_valid(self, form):
-        print('kir1')
+        send_mail('تایید دریافت پیام',
+                  f"""    {form.cleaned_data.get('name')} عزیز 
+                   پیام شما دریافت شد و در اسرع وقت پاسخ داده خواهد شد
+                    rezadarabi.ir""",
+                  'rezadaraiofficially@gmail.com',
+                  [str(form.cleaned_data.get('email'))],
+                  fail_silently=False)
+        print('kir')
         form.save()
-        print('kir2')
         return super(ContactView, self).form_valid(form)
 
-# def contact_view(request):
-#     if request.method == 'POST':
-#         form = forms.TiketForm(request.POST)
-#         if form.is_valid():
-#             # Process the form data
-#             return redirect('info:main')  # Redirect after successful form submission
-#     else:
-#         form = forms.TiketForm()
-#         return render(request, 'contact_us.html', {'form': form})
+
+class Handler404(TemplateView):
+    template_name = '404.html'
+

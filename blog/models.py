@@ -15,7 +15,7 @@ class Post(models.Model):
         DRAFT = 'DF', 'Draft'
         PUBLISHED = 'PB', 'Published'
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique=True)
+    slug = models.SlugField(max_length=250, unique_for_date='publish')
     body = models.TextField()
     caption = models.TextField()
     caption_2 = models.TextField()
@@ -42,7 +42,10 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:detail',
-                       args=[self.slug,
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug,
                              ])
 
 

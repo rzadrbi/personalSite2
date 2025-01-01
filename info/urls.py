@@ -7,7 +7,6 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='main'),
     path('resume', views.ResumeView.as_view(), name='Resume'),
     path('contact', views.ContactView.as_view(), name='contact'),
-    # path('contact', views.contact_view, name='contact'),
 ]
 
 
