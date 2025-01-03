@@ -5,48 +5,57 @@
 {% block title %} {{ post.title }} {% endblock %}
 {% block content %}
 
-		        <div class="col-12 col-md-12 col-lg-10">
-				    <div class="box box-content">
-						<!-- Post -->
-						<div class="pb-3">
-						    <header class="header-post">
-                                <h1 class="title title--h1">{{ post.title }}</h1>
-								<div class="caption-post">
-								    <p>{{ post.caption }}</p>
-								</div>
-								<div class="header-post__image-wrap">
-								    <img class="cover lazyload" src="{{ post.picture.url }}" data-zoom alt="" />
-								</div>
-							</header>
-							<div class="caption-post">
-								<p>{{ post.caption_2 }}</p>
-						    </div>
-							<div class="gallery-post">
-							    {% if post.picture_2 %}
-                                    <img class="gallery-post__item cover lazyload" src="{{ post.picture_2.url }}" data-zoom alt="" />
-                                {% endif %}
-								{% if post.picture_3 %}
-                                    <img class="gallery-post__item cover lazyload" src="{{ post.picture_3.url }}" data-zoom alt="" />
-                                {% endif %}
-							</div>
-                            <div class="caption-post mt-4">
-                                <h3 class="title title--h3">{{ post.summery_title }}</h3>
-								<p>{{ post.summery_text }}</p>
-                            </div>
-                            <div class="caption-post mt-4">
-                                <p>{{ post.body }}</p>
-                            </div>
-                            <div class="gallery-post__caption">منتشر شده در 
-                                {{ post.created |to_jalali:'%y/%m/%d' }}
-                                نویسنده : 
-                                {{ post.author }}
-                            </div>
-                            <footer class="footer-post">
-                                <a class="footer-post__share" href="tg://msg_url?url={{ request.build_absolute_uri }}&text={{ post.title }}" target="_blank"><img class="font-icon" src="{% static 'icons/telegram.svg' %}" alt="Telegram Icon"><span>اشتراک این پست در تلگرام</span></a>
-                                <a class="footer-post__share" href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}&summary={{ post.summary }}&source=Reza Darabi" target="_blank"><i class="font-icon icon-linkedin"></i><span> اشتراک این پست در لینکدین</span></a>
-                            </footer>
-                        </div>
-						
-                        
+    <div class="col-12 col-md-12 col-lg-10">
+        <div class="box box-content">
+            <!-- Post -->
+            <div class="pb-3">
+                <header class="header-post">
+                    <h1 class="title title--h1">{{ post.title | markdown  }}</h1>
+                    <div class="caption-post">
+                        <p>{{ post.caption }}</p>
                     </div>
+                    <div class="header-post__image-wrap">
+                        <img class="cover lazyload" src="{{ post.picture.url }}" data-zoom alt="" />
+                    </div>
+                </header>
+                <div class="caption-post">
+                    <p>{{ post.caption_2 }}</p>
+                </div>
+                <div class="gallery-post">
+                    {% if post.picture_2 %}
+                        <img class="gallery-post__item cover lazyload" src="{{ post.picture_2.url }}" data-zoom alt="" />
+                    {% endif %}
+                    {% if post.picture_3 %}
+                        <img class="gallery-post__item cover lazyload" src="{{ post.picture_3.url }}" data-zoom alt="" />
+                    {% endif %}
+                </div>
+                <div class="caption-post mt-4">
+                    <h3 class="title title--h3">{{ post.summery_title }}</h3>
+                    <p>{{ post.summery_text | markdown }}</p>
+                </div>
+                <div class="caption-post mt-4">
+                    <p>{{ post.body | markdown  }}</p>
+                </div>
+                <div class="gallery-post__caption">منتشر شده در
+                    {{ post.created |to_jalali:'%y/%m/%d' }}
+                    نویسنده :
+                    {{ post.author }}
+                </div>
+                <div class="gallery-post__caption">
+                    پست تگ شده با تگ های :
+                    {% for object in post.tags.all %}
+                        <p><a href="{% url 'blog:blog_list_by_tag' object %}">{{ object }}</a></p>
+                    {% endfor %}
+                </div>
+                <footer class="footer-post">
+                    <a class="footer-post__share" href="tg://msg_url?url={{ request.build_absolute_uri }}&text={{ post.title }}" target="_blank"><img class="font-icon" src="{% static 'icons/telegram.svg' %}" alt="Telegram Icon"><span>اشتراک این پست در تلگرام</span></a>
+                    <a class="footer-post__share" href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ post.title }}&summary={{ post.summary }}&source=Reza Darabi" target="_blank"><i class="font-icon icon-linkedin"></i><span> اشتراک این پست در لینکدین</span></a>
+                </footer>
+            </div>
+            <div class="pb-2">
+                <h4>پست های مشابه :</h4>
+                {% for object in similar_posts %} <a methods="get" href="{{ object.get_absolute_url }}"><button class="btn btn-outline-success">{{ object.title |  truncatewords:3 }}</button></a> {% endfor %}
+            </div>
+                        
+        </div>
 {% endblock %}

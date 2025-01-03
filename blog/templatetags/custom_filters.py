@@ -1,5 +1,7 @@
 from django import template
+from django.utils.safestring import mark_safe
 from django.utils.timezone import now
+import markdown as md
 
 register = template.Library()
 
@@ -22,3 +24,7 @@ def time_since(value):
     if diff.seconds >= 60:
         return f"{diff.seconds // 60} دقیقه پیش"
     return "چند لحظه پیش"
+
+@register.filter(name='markdown')
+def markdown(text):
+    return mark_safe(md.markdown(text))

@@ -1,4 +1,6 @@
 from django.contrib import admin
+
+from blog import models
 from blog.models import Post
 
 
@@ -12,5 +14,6 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'publish'
     ordering = ('-publish', 'status', )
     show_facets = admin.ShowFacets.ALWAYS
+
 
 

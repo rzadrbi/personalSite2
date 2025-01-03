@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-5&w$m8(-^&6q=s!eyzg*vb2vn$t#)^4da+_a)3$90_fy5qz8ae
 DEBUG = True
 # DEBUG = False
 
-
+SITE_ID = 1
 
 ALLOWED_HOSTS = ['*']
 
@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     #MyApps
 
@@ -39,8 +41,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'django_jalali',
     'jalali_date',
-    'django.contrib.sites',
     'allauth',
+    'taggit',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',

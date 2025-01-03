@@ -8,11 +8,18 @@
 				    <div class="box box-content">
 					    <div class="pb-2">
 		                    <h1 class="title title--h1 first-title title__separate">وبلاگ</h1>
+                            <p>تگ ها :</p>
+                            {% for object in tags %} <a methods="get" href="{% url 'blog:blog_list_by_tag' object %}"><button class="btn btn-outline-success">{{ object }}</button></a> {% endfor %}
 					    </div>
 
 						<!-- News -->
-						<div class="news-grid">
-							<!-- Post -->
+                        {% if tag %}
+                            <p>پست های تگ شده با {{ tag }} :</p>
+                        {% else %}
+                            <p>پست ها :</p>
+                        {% endif %}
+                        <div class="news-grid">
+                            <!-- Post -->
                             {% for object in posts %}
                                 {% if object.status == 'PB' %}
                                     <article class="news-item box">

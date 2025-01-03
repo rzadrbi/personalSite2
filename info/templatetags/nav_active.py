@@ -1,5 +1,4 @@
 from django import template
-from django.urls import resolve
 
 register = template.Library()
 
@@ -10,3 +9,4 @@ def active_url(context, url_name):
     if request.path == url_name:
         return 'active'
     return ''
+
